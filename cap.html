@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Country Capital Predictor</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            text-align: center;
+            padding: 50px;
+        }
+        .box {
+            background: white;
+            padding: 30px;
+            width: 400px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Capital Predictor 🌍</h2>
+    <h3 id="country"></h3>
+
+    <input type="text" id="answer" placeholder="Enter Capital">
+    <br>
+    <button onclick="checkCapital()">Check Answer</button>
+
+    <p id="result"></p>
+    <button onclick="nextCountry()">Next Country</button>
+</div>
+
+<script>
+    const capitals = {
+        "India": "New Delhi",
+        "United States": "Washington DC",
+        "China": "Beijing",
+        "Japan": "Tokyo",
+        "United Kingdom": "London",
+        "France": "Paris",
+        "Germany": "Berlin",
+        "Italy": "Rome",
+        "Canada": "Ottawa",
+        "Australia": "Canberra",
+        "Brazil": "Brasilia",
+        "Russia": "Moscow",
+        "South Africa": "Pretoria",
+        "Sri Lanka": "Sri Jayawardenepura Kotte",
+        "Nepal": "Kathmandu",
+        "UAE": "Abu Dhabi",
+        "Saudi Arabia": "Riyadh",
+        "Qatar": "Doha",
+        "Malaysia": "Kuala Lumpur",
+        "Thailand": "Bangkok"
+    };
+
+    const countries = Object.keys(capitals);
+    let currentCountry = "";
+
+    function nextCountry() {
+        document.getElementById("answer").value = "";
+        document.getElementById("result").innerHTML = "";
+
+        currentCountry = countries[Math.floor(Math.random() * countries.length)];
+        document.getElementById("country").innerHTML = "Country: " + currentCountry;
+    }
+
+    function checkCapital() {
+        const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
+        const correctAnswer = capitals[currentCountry].toLowerCase();
+
+        if (userAnswer === correctAnswer) {
+            document.getElementById("result").innerHTML = "✅ Correct!";
+            document.getElementById("result").style.color = "green";
+        } else {
+            document.getElementById("result").innerHTML =
+                "❌ Wrong! Correct answer: " + capitals[currentCountry];
+            document.getElementById("result").style.color = "red";
+        }
+    }
+
+    nextCountry();
+</script>
+
+</body>
+</html>
